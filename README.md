@@ -97,3 +97,51 @@ nohup bash -c "CUDA_VISIBLE_DEVICES=0 accelerate launch train_rec.py --dataset r
 ```bash
 nohup bash -c "CUDA_VISIBLE_DEVICES=0 accelerate launch train_unified.py --dataset redial --use_prompt_enhancer --tokenizer microsoft/DialoGPT-small --model microsoft/DialoGPT-small --n_prefix_conv 20  --n_prefix_rec 10 --prompt_encoder /home/Nema/UniCRS_GraphRAG/UniCRS/src/pretrained_prompt/best --num_train_epochs 10 --gradient_accumulation_steps 1 --ignore_pad_token_for_loss --per_device_train_batch_size 64 --per_device_eval_batch_size 64 --num_warmup_steps 6345 --context_max_length 200 --resp_max_length 183 --prompt_max_length 200 --entity_max_length 32 --learning_rate 1e-4 --output_dir /home/Nema/UniCRS_GraphRAG/UniCRS/src/unified_prompt > train_unified.log 2>&1 &"
 ```
+
+Part 3: Explainability Modules
+This section covers the two novel inference-time modules introduced in this project: explicit KG path reasoning and KG-grounded conversational response generation.
+Step 1: KG Path Reasoning
+Run the path reasoning module over the full test split. This generates a reasoning path from dialogue-mentioned movies to the top-5 predicted movies for each sample.
+```bash
+cd UniCRS/src
+nohup env CUDA_VISIBLE_DEVICES=0 python infer_rec_with_reasoning.py \
+    --dataset redial_gen \
+    --split test \
+    --tokenizer microsoft/DialoGPT-small \
+    --model microsoft/DialoGPT-small \
+    --prompt_encoder ./recommendation_prompt/best \
+    --output_file ./results/reasoning_analysis_kecr.json \
+    --embedding_weight 0.7 \
+    --top_k_explain 5 \
+    > ./results/kecr_run.log 2>&1 &
+```
+
+Monitor progress:
+```bash
+tail -f ./results/kecr_run.log
+```
+Step 2: Compute Path Coverage Metrics
+```bash
+cd UniCRS/src/results
+python compute_pc5.py
+```
+Step 3: KG-Grounded Response Generation
+Run Mistral-7B-Instruct-v0.2 to generate natural language explanations conditioned on the dialogue history, recommended movie, and KG reasoning path. Only samples with a valid path are processed.
+```bash
+cd UniCRS/src
+nohup env CUDA_VISIBLE_DEVICES=0 python generate_explanations.py \
+    --reasoning ./results/reasoning_analysis_kecr.json \
+    --output ./results/explanations_mistral.jsonl \
+    --only_with_path \
+    --batch_size 8 \
+    > ./results/mistral_run.log 2>&1 &
+```
+Monitor progress:
+```bash
+tail -f ./results/mistral_run.log
+```
+Notes
+
+The path reasoning module requires the recommendation_prompt/best checkpoint from Part 2 Step 4
+Response generation requires a GPU with at least 16GB VRAM for 4-bit quantised Mistral-7B inference
+The GraphRAG KG parquet files must be present at GraphRAG/output/ for path traversal
