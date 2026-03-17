@@ -1,0 +1,10 @@
+*.pt filter=lfs diff=lfs merge=lfs -text
+*.jsonl filter=lfs diff=lfs merge=lfs -text
+UniCRS/data/redial/train_data_processed.jsonl filter=lfs diff=lfs merge=lfs -text
+UniCRS/src/conversation_prompt/best/model.pt filter=lfs diff=lfs merge=lfs -text
+UniCRS/src/conversation_prompt/final/model.pt filter=lfs diff=lfs merge=lfs -text
+UniCRS/src/pretrained_prompt/best/model.pt filter=lfs diff=lfs merge=lfs -text
+UniCRS/src/recommendation_prompt_success_01/best/model.pt filter=lfs diff=lfs merge=lfs -text
+UniCRS/src/recommendation_prompt_success_01/final/model.pt filter=lfs diff=lfs merge=lfs -text
+data/redial/train_data_dbpedia_raw.jsonl filter=lfs diff=lfs merge=lfs -text
+*.pkl filter=lfs diff=lfs merge=lfs -text

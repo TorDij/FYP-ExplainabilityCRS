@@ -1,0 +1,1055 @@
+2025-03-12 21:39:50.106 | INFO     | __main__:<module>:89 - Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+
+Mixed precision type: no
+
+2025-03-12 21:39:50.106 | INFO     | __main__:<module>:90 - {'seed': 42, 'output_dir': None, 'debug': False, 'dataset': 'redial', 'split': 'valid', 'num_workers': 0, 'context_max_length': 200, 'resp_max_length': 183, 'entity_max_length': 32, 'prompt_max_length': 200, 'tokenizer': 'microsoft/DialoGPT-small', 'ignore_pad_token_for_loss': False, 'text_tokenizer': None, 'model': 'microsoft/DialoGPT-small', 'max_gen_len': 50, 'text_encoder': None, 'prompt_encoder': '/home/Nema/UniCRS_GraphRAG/UniCRS/src/conversation_prompt/best', 'n_prefix_conv': 20, 'num_bases': 8, 'num_train_epochs': 10, 'max_train_steps': None, 'per_device_train_batch_size': 4, 'per_device_eval_batch_size': 64, 'gradient_accumulation_steps': 1, 'learning_rate': 1e-05, 'weight_decay': 0.01, 'max_grad_norm': None, 'num_warmup_steps': 10000, 'mixed_precision': 'no', 'use_wandb': False, 'entity': None, 'project': None, 'name': None, 'log_all': False}
+loading file vocab.json from cache at /home/Nema/.cache/huggingface/hub/models--microsoft--DialoGPT-small/snapshots/49c537161a457d5256512f9d2d38a87d81ae0f0e/vocab.json
+loading file merges.txt from cache at /home/Nema/.cache/huggingface/hub/models--microsoft--DialoGPT-small/snapshots/49c537161a457d5256512f9d2d38a87d81ae0f0e/merges.txt
+loading file tokenizer.json from cache at None
+loading file added_tokens.json from cache at None
+loading file special_tokens_map.json from cache at None
+loading file tokenizer_config.json from cache at /home/Nema/.cache/huggingface/hub/models--microsoft--DialoGPT-small/snapshots/49c537161a457d5256512f9d2d38a87d81ae0f0e/tokenizer_config.json
+loading configuration file config.json from cache at /home/Nema/.cache/huggingface/hub/models--microsoft--DialoGPT-small/snapshots/49c537161a457d5256512f9d2d38a87d81ae0f0e/config.json
+Model config GPT2Config {
+  "activation_function": "gelu_new",
+  "architectures": [
+    "GPT2LMHeadModel"
+  ],
+  "attn_pdrop": 0.1,
+  "bos_token_id": 50256,
+  "embd_pdrop": 0.1,
+  "eos_token_id": 50256,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "model_type": "gpt2",
+  "n_ctx": 1024,
+  "n_embd": 768,
+  "n_head": 12,
+  "n_inner": null,
+  "n_layer": 12,
+  "n_positions": 1024,
+  "reorder_and_upcast_attn": false,
+  "resid_pdrop": 0.1,
+  "scale_attn_by_inverse_layer_idx": false,
+  "scale_attn_weights": true,
+  "summary_activation": null,
+  "summary_first_dropout": 0.1,
+  "summary_proj_to_labels": true,
+  "summary_type": "cls_index",
+  "summary_use_proj": true,
+  "task_specific_params": {
+    "conversational": {
+      "max_length": 1000
+    }
+  },
+  "transformers_version": "4.46.3",
+  "use_cache": true,
+  "vocab_size": 50257
+}
+
+loading weights file model.safetensors from cache at /home/Nema/.cache/huggingface/hub/models--microsoft--DialoGPT-small/snapshots/49c537161a457d5256512f9d2d38a87d81ae0f0e/model.safetensors
+PromptGPT2forCRS has generative capabilities, as `prepare_inputs_for_generation` is explicitly overwritten. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+Generate config GenerationConfig {
+  "bos_token_id": 50256,
+  "eos_token_id": 50256
+}
+
+All model checkpoint weights were used when initializing PromptGPT2forCRS.
+
+All the weights of PromptGPT2forCRS were initialized from the model checkpoint at microsoft/DialoGPT-small.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use PromptGPT2forCRS for predictions without further training.
+loading configuration file generation_config.json from cache at /home/Nema/.cache/huggingface/hub/models--microsoft--DialoGPT-small/snapshots/49c537161a457d5256512f9d2d38a87d81ae0f0e/generation_config.json
+Generate config GenerationConfig {
+  "bos_token_id": 50256,
+  "eos_token_id": 50256
+}
+
+You are resizing the embedding layer without providing a `pad_to_multiple_of` parameter. This means that the new embedding dimension will be 50259. This might induce some performance reduction as *Tensor Cores* will not be available. For more details about this, or help on choosing the correct value for resizing, refer to this guide: https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#requirements-tc
+The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+/home/Nema/UniCRS_GraphRAG/UniCRS/src/model_prompt.py:277: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  torch.load(load_path, map_location=torch.device('cpu')), strict=False
+['edge_index', 'edge_type'] []
+  0%|          | 0/6253 [00:00<?, ?it/s]/home/Nema/miniconda3/envs/torch113/lib/python3.8/site-packages/transformers/tokenization_utils_base.py:4114: UserWarning: `as_target_tokenizer` is deprecated and will be removed in v5 of Transformers. You can tokenize your labels by using the argument `text_target` of the regular `__call__` method (either in the same call as your input texts if you use the same keyword arguments, or in a separate call.
+  warnings.warn(
+  2%|▏         | 149/6253 [00:00<00:04, 1487.73it/s]  5%|▌         | 327/6253 [00:00<00:03, 1659.45it/s]  8%|▊         | 510/6253 [00:00<00:03, 1718.00it/s] 11%|█         | 682/6253 [00:00<00:03, 1659.23it/s] 14%|█▍        | 865/6253 [00:00<00:03, 1714.71it/s] 17%|█▋        | 1074/6253 [00:00<00:02, 1836.59it/s] 20%|██        | 1259/6253 [00:00<00:02, 1820.14it/s] 23%|██▎       | 1455/6253 [00:00<00:02, 1863.70it/s] 26%|██▋       | 1642/6253 [00:00<00:02, 1810.11it/s] 29%|██▉       | 1826/6253 [00:01<00:02, 1816.14it/s] 32%|███▏      | 2010/6253 [00:01<00:02, 1822.43it/s] 35%|███▌      | 2212/6253 [00:01<00:02, 1875.91it/s] 38%|███▊      | 2400/6253 [00:01<00:02, 1812.52it/s] 42%|████▏     | 2596/6253 [00:01<00:01, 1855.07it/s] 45%|████▍     | 2797/6253 [00:01<00:01, 1898.72it/s] 48%|████▊     | 2988/6253 [00:01<00:01, 1853.17it/s] 51%|█████     | 3186/6253 [00:01<00:01, 1888.73it/s] 54%|█████▍    | 3376/6253 [00:01<00:01, 1864.97it/s] 57%|█████▋    | 3563/6253 [00:01<00:01, 1816.59it/s] 60%|█████▉    | 3746/6253 [00:02<00:01, 1496.21it/s] 62%|██████▏   | 3905/6253 [00:02<00:01, 1425.57it/s] 65%|██████▌   | 4079/6253 [00:02<00:01, 1503.92it/s] 68%|██████▊   | 4259/6253 [00:02<00:01, 1581.90it/s] 71%|███████▏  | 4458/6253 [00:02<00:01, 1690.82it/s] 74%|███████▍  | 4635/6253 [00:02<00:00, 1712.35it/s] 77%|███████▋  | 4828/6253 [00:02<00:00, 1768.88it/s] 80%|████████  | 5008/6253 [00:02<00:00, 1589.80it/s] 83%|████████▎ | 5172/6253 [00:03<00:00, 1511.22it/s] 86%|████████▌ | 5369/6253 [00:03<00:00, 1633.09it/s] 89%|████████▉ | 5556/6253 [00:03<00:00, 1694.76it/s] 92%|█████████▏| 5746/6253 [00:03<00:00, 1752.10it/s] 95%|█████████▍| 5939/6253 [00:03<00:00, 1802.77it/s] 98%|█████████▊| 6122/6253 [00:03<00:00, 1715.58it/s]100%|██████████| 6253/6253 [00:03<00:00, 1728.12it/s]
+/home/Nema/miniconda3/envs/torch113/lib/python3.8/site-packages/accelerate/accelerator.py:604: FutureWarning: The `use_fp16` property is deprecated and will be removed in version 1.0 of Accelerate use `Accelerator.mixed_precision == 'fp16'` instead.
+  warnings.warn(
+  0%|          | 0/89 [00:00<?, ?it/s]You're using a GPT2TokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 44, 18432])
+[DEBUG] Expected elements: 51904512
+[DEBUG] Actual elements: 51904512
+[2025-03-12 21:39:59,326] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+/home/Nema/miniconda3/envs/torch113/lib/python3.8/site-packages/transformers/tokenization_utils_base.py:2852: UserWarning: `max_length` is ignored when `padding`=`True` and there is no truncation strategy. To pad to max length, use `padding='max_length'`.
+  warnings.warn(
+Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+/home/Nema/miniconda3/envs/torch113/lib/python3.8/site-packages/nltk/translate/bleu_score.py:577: UserWarning: 
+The hypothesis contains 0 counts of 3-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+/home/Nema/miniconda3/envs/torch113/lib/python3.8/site-packages/nltk/translate/bleu_score.py:577: UserWarning: 
+The hypothesis contains 0 counts of 4-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+/home/Nema/miniconda3/envs/torch113/lib/python3.8/site-packages/nltk/translate/bleu_score.py:577: UserWarning: 
+The hypothesis contains 0 counts of 2-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+  1%|          | 1/89 [00:13<19:48, 13.51s/it]/home/Nema/miniconda3/envs/torch113/lib/python3.8/site-packages/transformers/tokenization_utils_base.py:2852: UserWarning: `max_length` is ignored when `padding`=`True` and there is no truncation strategy. To pad to max length, use `padding='max_length'`.
+  warnings.warn(
+Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+  2%|▏         | 2/89 [00:30<22:46, 15.71s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+  3%|▎         | 3/89 [00:37<16:55, 11.80s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+  4%|▍         | 4/89 [00:45<14:12, 10.03s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+  6%|▌         | 5/89 [00:51<12:23,  8.85s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+  7%|▋         | 6/89 [01:02<13:11,  9.54s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+  8%|▊         | 7/89 [01:10<12:10,  8.91s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+  9%|▉         | 8/89 [01:19<12:07,  8.99s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 10%|█         | 9/89 [01:28<11:54,  8.93s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 11%|█         | 10/89 [01:36<11:30,  8.74s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 12%|█▏        | 11/89 [01:53<14:25, 11.10s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 13%|█▎        | 12/89 [02:01<13:14, 10.31s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 15%|█▍        | 13/89 [02:10<12:18,  9.72s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 16%|█▌        | 14/89 [02:17<11:28,  9.18s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 17%|█▋        | 15/89 [02:25<10:52,  8.81s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 18%|█▊        | 16/89 [02:33<10:12,  8.39s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 19%|█▉        | 17/89 [02:42<10:11,  8.49s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 20%|██        | 18/89 [02:50<10:06,  8.54s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 21%|██▏       | 19/89 [02:57<09:17,  7.97s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 22%|██▏       | 20/89 [03:03<08:36,  7.48s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 24%|██▎       | 21/89 [03:12<08:56,  7.90s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 25%|██▍       | 22/89 [03:26<10:40,  9.56s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 26%|██▌       | 23/89 [03:39<11:39, 10.59s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 27%|██▋       | 24/89 [03:48<11:00, 10.16s/it]node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 45, 18432])
+[DEBUG] Expected elements: 53084160
+[DEBUG] Actual elements: 53084160
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 42, 18432])
+[DEBUG] Expected elements: 49545216
+[DEBUG] Actual elements: 49545216
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 45, 18432])
+[DEBUG] Expected elements: 53084160
+[DEBUG] Actual elements: 53084160
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 42, 18432])
+[DEBUG] Expected elements: 49545216
+[DEBUG] Actual elements: 49545216
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 42, 18432])
+[DEBUG] Expected elements: 49545216
+[DEBUG] Actual elements: 49545216
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 41, 18432])
+[DEBUG] Expected elements: 48365568
+[DEBUG] Actual elements: 48365568
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 49, 18432])
+[DEBUG] Expected elements: 57802752
+[DEBUG] Actual elements: 57802752
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 42, 18432])
+[DEBUG] Expected elements: 49545216
+[DEBUG] Actual elements: 49545216
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 41, 18432])
+[DEBUG] Expected elements: 48365568
+[DEBUG] Actual elements: 48365568
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 41, 18432])
+[DEBUG] Expected elements: 48365568
+[DEBUG] Actual elements: 48365568
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 50, 18432])
+[DEBUG] Expected elements: 58982400
+[DEBUG] Actual elements: 58982400
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 43, 18432])
+[DEBUG] Expected elements: 50724864
+[DEBUG] Actual elements: 50724864
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 43, 18432])
+[DEBUG] Expected elements: 50724864
+[DEBUG] Actual elements: 50724864
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 45, 18432])
+[DEBUG] Expected elements: 53084160
+[DEBUG] Actual elements: 53084160
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 51, 18432])
+[DEBUG] Expected elements: 60162048
+[DEBUG] Actual elements: 60162048
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 50, 18432])
+[DEBUG] Expected elements: 58982400
+[DEBUG] Actual elements: 58982400
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 46, 18432])
+[DEBUG] Expected elements: 54263808
+[DEBUG] Actual elements: 54263808
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 46, 18432])
+[DEBUG] Expected elements: 54263808
+[DEBUG] Actual elements: 54263808
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 41, 18432])
+[DEBUG] Expected elements: 48365568
+[DEBUG] Actual elements: 48365568
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 38, 18432])
+[DEBUG] Expected elements: 44826624
+[DEBUG] Actual elements: 44826624
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 45, 18432])
+[DEBUG] Expected elements: 53084160
+[DEBUG] Actual elements: 53084160
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 42, 18432])
+[DEBUG] Expected elements: 49545216
+[DEBUG] Actual elements: 49545216
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 48, 18432])
+[DEBUG] Expected elements: 56623104
+[DEBUG] Actual elements: 56623104
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 45, 18432])
+[DEBUG] Expected elements: 53084160Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 28%|██▊       | 25/89 [03:54<09:32,  8.94s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 29%|██▉       | 26/89 [04:02<09:05,  8.66s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 30%|███       | 27/89 [04:10<08:53,  8.61s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 31%|███▏      | 28/89 [04:20<09:13,  9.07s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 33%|███▎      | 29/89 [04:29<08:54,  8.92s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 34%|███▎      | 30/89 [04:40<09:25,  9.59s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 35%|███▍      | 31/89 [04:50<09:25,  9.75s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 36%|███▌      | 32/89 [04:58<08:41,  9.16s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 37%|███▋      | 33/89 [05:07<08:29,  9.09s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 38%|███▊      | 34/89 [05:15<08:09,  8.90s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 39%|███▉      | 35/89 [05:24<07:51,  8.74s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 40%|████      | 36/89 [05:31<07:25,  8.41s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 42%|████▏     | 37/89 [05:42<07:51,  9.08s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 43%|████▎     | 38/89 [05:53<08:06,  9.54s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 44%|████▍     | 39/89 [06:03<08:12,  9.85s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 45%|████▍     | 40/89 [06:12<07:50,  9.59s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 46%|████▌     | 41/89 [06:20<07:17,  9.11s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 47%|████▋     | 42/89 [06:26<06:22,  8.15s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 48%|████▊     | 43/89 [06:34<06:09,  8.04s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 49%|████▉     | 44/89 [06:43<06:12,  8.29s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 51%|█████     | 45/89 [06:59<07:43, 10.53s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 52%|█████▏    | 46/89 [07:10<07:45, 10.81s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 53%|█████▎    | 47/89 [07:17<06:45,  9.65s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 54%|█████▍    | 48/89 [07:30<07:17, 10.67s/it]
+[DEBUG] Actual elements: 53084160
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 49, 18432])
+[DEBUG] Expected elements: 57802752
+[DEBUG] Actual elements: 57802752
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 41, 18432])
+[DEBUG] Expected elements: 48365568
+[DEBUG] Actual elements: 48365568
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 42, 18432])
+[DEBUG] Expected elements: 49545216
+[DEBUG] Actual elements: 49545216
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 42, 18432])
+[DEBUG] Expected elements: 49545216
+[DEBUG] Actual elements: 49545216
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 41, 18432])
+[DEBUG] Expected elements: 48365568
+[DEBUG] Actual elements: 48365568
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 49, 18432])
+[DEBUG] Expected elements: 57802752
+[DEBUG] Actual elements: 57802752
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 44, 18432])
+[DEBUG] Expected elements: 51904512
+[DEBUG] Actual elements: 51904512
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 48, 18432])
+[DEBUG] Expected elements: 56623104
+[DEBUG] Actual elements: 56623104
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 52, 18432])
+[DEBUG] Expected elements: 61341696
+[DEBUG] Actual elements: 61341696
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 45, 18432])
+[DEBUG] Expected elements: 53084160
+[DEBUG] Actual elements: 53084160
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 36, 18432])
+[DEBUG] Expected elements: 42467328
+[DEBUG] Actual elements: 42467328
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 39, 18432])
+[DEBUG] Expected elements: 46006272
+[DEBUG] Actual elements: 46006272
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 44, 18432])
+[DEBUG] Expected elements: 51904512
+[DEBUG] Actual elements: 51904512
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 40, 18432])
+[DEBUG] Expected elements: 47185920
+[DEBUG] Actual elements: 47185920
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 46, 18432])
+[DEBUG] Expected elements: 54263808
+[DEBUG] Actual elements: 54263808
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 47, 18432])
+[DEBUG] Expected elements: 55443456
+[DEBUG] Actual elements: 55443456
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 39, 18432])
+[DEBUG] Expected elements: 46006272
+[DEBUG] Actual elements: 46006272
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 45, 18432])
+[DEBUG] Expected elements: 53084160
+[DEBUG] Actual elements: 53084160
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 52, 18432])
+[DEBUG] Expected elements: 61341696
+[DEBUG] Actual elements: 61341696
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 50, 18432])
+[DEBUG] Expected elements: 58982400
+[DEBUG] Actual elements: 58982400
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 42, 18432])
+[DEBUG] Expected elements: 49545216
+[DEBUG] Actual elements: 49545216
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 48, 18432])
+[DEBUG] Expected elements: 56623104
+[DEBUG] Actual elements: 56623104
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 41, 18432])
+[DEBUG] Expected elements: 48365568
+[DEBUG] Actual elements: 48365568
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 44, 18432])Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 55%|█████▌    | 49/89 [07:38<06:31,  9.78s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 56%|█████▌    | 50/89 [07:44<05:38,  8.67s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 57%|█████▋    | 51/89 [07:51<05:15,  8.30s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 58%|█████▊    | 52/89 [07:59<05:00,  8.13s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 60%|█████▉    | 53/89 [08:06<04:45,  7.94s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 61%|██████    | 54/89 [08:22<06:00, 10.30s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 62%|██████▏   | 55/89 [08:33<05:59, 10.58s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 63%|██████▎   | 56/89 [08:43<05:41, 10.35s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 64%|██████▍   | 57/89 [08:51<05:03,  9.48s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 65%|██████▌   | 58/89 [08:59<04:38,  8.97s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 66%|██████▋   | 59/89 [09:07<04:28,  8.96s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 67%|██████▋   | 60/89 [09:15<04:09,  8.60s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 69%|██████▊   | 61/89 [09:23<03:53,  8.33s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 70%|██████▉   | 62/89 [09:35<04:15,  9.46s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 71%|███████   | 63/89 [09:41<03:42,  8.54s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 72%|███████▏  | 64/89 [09:50<03:31,  8.46s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 73%|███████▎  | 65/89 [09:58<03:19,  8.33s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 74%|███████▍  | 66/89 [10:06<03:09,  8.26s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 75%|███████▌  | 67/89 [10:16<03:15,  8.90s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 76%|███████▋  | 68/89 [10:23<02:55,  8.37s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 78%|███████▊  | 69/89 [10:32<02:51,  8.55s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 79%|███████▊  | 70/89 [10:43<02:53,  9.12s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 80%|███████▉  | 71/89 [10:50<02:33,  8.51s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 81%|████████  | 72/89 [10:57<02:17,  8.11s/it]
+[DEBUG] Expected elements: 51904512
+[DEBUG] Actual elements: 51904512
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 44, 18432])
+[DEBUG] Expected elements: 51904512
+[DEBUG] Actual elements: 51904512
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 49, 18432])
+[DEBUG] Expected elements: 57802752
+[DEBUG] Actual elements: 57802752
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 46, 18432])
+[DEBUG] Expected elements: 54263808
+[DEBUG] Actual elements: 54263808
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 42, 18432])
+[DEBUG] Expected elements: 49545216
+[DEBUG] Actual elements: 49545216
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 46, 18432])
+[DEBUG] Expected elements: 54263808
+[DEBUG] Actual elements: 54263808
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 40, 18432])
+[DEBUG] Expected elements: 47185920
+[DEBUG] Actual elements: 47185920
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 50, 18432])
+[DEBUG] Expected elements: 58982400
+[DEBUG] Actual elements: 58982400
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 46, 18432])
+[DEBUG] Expected elements: 54263808
+[DEBUG] Actual elements: 54263808
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 46, 18432])
+[DEBUG] Expected elements: 54263808
+[DEBUG] Actual elements: 54263808
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 45, 18432])
+[DEBUG] Expected elements: 53084160
+[DEBUG] Actual elements: 53084160
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 52, 18432])
+[DEBUG] Expected elements: 61341696
+[DEBUG] Actual elements: 61341696
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 39, 18432])
+[DEBUG] Expected elements: 46006272
+[DEBUG] Actual elements: 46006272
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 40, 18432])
+[DEBUG] Expected elements: 47185920
+[DEBUG] Actual elements: 47185920
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 52, 18432])
+[DEBUG] Expected elements: 61341696
+[DEBUG] Actual elements: 61341696
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 44, 18432])
+[DEBUG] Expected elements: 51904512
+[DEBUG] Actual elements: 51904512
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 52, 18432])
+[DEBUG] Expected elements: 61341696
+[DEBUG] Actual elements: 61341696
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 46, 18432])
+[DEBUG] Expected elements: 54263808
+[DEBUG] Actual elements: 54263808
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 48, 18432])
+[DEBUG] Expected elements: 56623104
+[DEBUG] Actual elements: 56623104
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 43, 18432])
+[DEBUG] Expected elements: 50724864
+[DEBUG] Actual elements: 50724864
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 52, 18432])
+[DEBUG] Expected elements: 61341696
+[DEBUG] Actual elements: 61341696
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 49, 18432])
+[DEBUG] Expected elements: 57802752
+[DEBUG] Actual elements: 57802752
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 43, 18432])
+[DEBUG] Expected elements: 50724864
+[DEBUG] Actual elements: 50724864
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 41, 18432])
+[DEBUG] Expected elements: 48365568
+[DEBUG] Actual elements: 48365568
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 43, 18432])Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 82%|████████▏ | 73/89 [11:09<02:26,  9.13s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 83%|████████▎ | 74/89 [11:19<02:23,  9.59s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 84%|████████▍ | 75/89 [11:28<02:09,  9.26s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 85%|████████▌ | 76/89 [11:39<02:08,  9.85s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 87%|████████▋ | 77/89 [11:47<01:51,  9.28s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 88%|████████▊ | 78/89 [11:58<01:48,  9.86s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 89%|████████▉ | 79/89 [12:08<01:38,  9.90s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 90%|████████▉ | 80/89 [12:19<01:31, 10.18s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 91%|█████████ | 81/89 [12:27<01:16,  9.55s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 92%|█████████▏| 82/89 [12:34<01:02,  8.91s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 93%|█████████▎| 83/89 [12:45<00:55,  9.32s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 94%|█████████▍| 84/89 [12:54<00:46,  9.33s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 96%|█████████▌| 85/89 [13:02<00:35,  8.84s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 97%|█████████▋| 86/89 [13:10<00:25,  8.53s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 98%|█████████▊| 87/89 [13:17<00:16,  8.27s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+ 99%|█████████▉| 88/89 [13:31<00:09,  9.79s/it]Setting `pad_token_id` to `eos_token_id`:None for open-end generation.
+100%|██████████| 89/89 [13:32<00:00,  7.23s/it]100%|██████████| 89/89 [13:32<00:00,  9.13s/it]
+2025-03-12 21:53:31.239 | INFO     | __main__:<module>:189 - {'valid/bleu@1': 0.14690191770597158, 'valid/bleu@2': 0.03572516859616827, 'valid/bleu@3': 0.018248052425113105, 'valid/bleu@4': 0.0089982414450915, 'valid/dist@1': 0.2751903665663184, 'valid/dist@2': 0.7565078802904197, 'valid/dist@3': 1.2032937843102531, 'valid/dist@4': 1.478838321232513, 'valid/item_ratio': 0.0, 'valid/sent_cnt': 5647}
+
+[DEBUG] Expected elements: 50724864
+[DEBUG] Actual elements: 50724864
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 52, 18432])
+[DEBUG] Expected elements: 61341696
+[DEBUG] Actual elements: 61341696
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 43, 18432])
+[DEBUG] Expected elements: 50724864
+[DEBUG] Actual elements: 50724864
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 46, 18432])
+[DEBUG] Expected elements: 54263808
+[DEBUG] Actual elements: 54263808
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 49, 18432])
+[DEBUG] Expected elements: 57802752
+[DEBUG] Actual elements: 57802752
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 42, 18432])
+[DEBUG] Expected elements: 49545216
+[DEBUG] Actual elements: 49545216
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 41, 18432])
+[DEBUG] Expected elements: 48365568
+[DEBUG] Actual elements: 48365568
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 39, 18432])
+[DEBUG] Expected elements: 46006272
+[DEBUG] Actual elements: 46006272
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 46, 18432])
+[DEBUG] Expected elements: 54263808
+[DEBUG] Actual elements: 54263808
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 52, 18432])
+[DEBUG] Expected elements: 61341696
+[DEBUG] Actual elements: 61341696
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 42, 18432])
+[DEBUG] Expected elements: 49545216
+[DEBUG] Actual elements: 49545216
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 41, 18432])
+[DEBUG] Expected elements: 48365568
+[DEBUG] Actual elements: 48365568
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 48, 18432])
+[DEBUG] Expected elements: 56623104
+[DEBUG] Actual elements: 56623104
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 46, 18432])
+[DEBUG] Expected elements: 54263808
+[DEBUG] Actual elements: 54263808
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 49, 18432])
+[DEBUG] Expected elements: 57802752
+[DEBUG] Actual elements: 57802752
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([64, 46, 18432])
+[DEBUG] Expected elements: 54263808
+[DEBUG] Actual elements: 54263808
+node_embeds device: cuda:0
+edge_index device: cuda:0
+edge_type device: cuda:0
+node_embeds shape: torch.Size([11655, 384])
+edge_index shape: torch.Size([2, 45180])
+edge_type shape: torch.Size([45180])
+[DEBUG] prompt_embeds shape BEFORE reshaping: torch.Size([15, 37, 18432])
+[DEBUG] Expected elements: 10229760
+[DEBUG] Actual elements: 10229760
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)

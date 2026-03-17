@@ -1,0 +1,23 @@
+# Files to ignore
+.env
+nohup.out
+__init__.py
+output.zip
+/home/Nema/UniCRS_GraphRAG/UniCRS/src/conv_infer_test_output.log
+/home/Nema/UniCRS_GraphRAG/UniCRS/src/conv_infer_train_output.log
+/home/Nema/UniCRS_GraphRAG/UniCRS/src/conv_infer_valid_output.log
+/home/Nema/UniCRS_GraphRAG/UniCRS/src/rec_train_output.log
+/home/Nema/UniCRS_GraphRAG/UniCRS/src/train_conv.log
+/home/Nema/UniCRS_GraphRAG/UniCRS/src/train_pre.log
+
+# Folders to ignore
+cache/
+embedding_cache/
+__pycache__/
+dialogue_outputs/
+Recommendation_GraphRAG/output/
+Recommendation_GraphRAG/dialogues
+old_successful_results/
+UniCRS/src/data/redial/train_data_processed.jsonl
+UniCRS/src/data/redial/test_data_processed.jsonl
+UniCRS/src/data/redial/valid_data_processed.jsonl

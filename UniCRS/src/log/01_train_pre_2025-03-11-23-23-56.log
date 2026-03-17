@@ -1,0 +1,42 @@
+2025-03-11 23:23:56.197 | INFO     | __main__:<module>:75 - {'seed': 42, 'output_dir': '/home/Nema/UniCRS_GraphRAG/UniCRS/src/pretrained_prompt', 'debug': False, 'dataset': 'redial', 'num_workers': 0, 'max_length': 256, 'entity_max_length': None, 'tokenizer': 'microsoft/DialoGPT-small', 'model': 'microsoft/DialoGPT-small', 'num_bases': 8, 'num_train_epochs': 5, 'max_train_steps': None, 'per_device_train_batch_size': 64, 'per_device_eval_batch_size': 128, 'gradient_accumulation_steps': 1, 'learning_rate': 1e-05, 'weight_decay': 0.01, 'max_grad_norm': None, 'num_warmup_steps': 1389, 'mixed_precision': 'fp16', 'use_wandb': False, 'entity': None, 'project': None, 'name': None, 'log_all': False}
+2025-03-11 23:23:56.197 | INFO     | __main__:<module>:76 - Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+
+Mixed precision type: fp16
+
+2025-03-11 23:57:08.640 | INFO     | __main__:<module>:269 - {'valid/recall@1': 0.10311115392024658, 'valid/recall@10': 0.3068772876131767, 'valid/recall@50': 0.518734347909844, 'valid/ndcg@1': 0.10311115392024658, 'valid/ndcg@10': 0.192844697308894, 'valid/ndcg@50': 0.24029678582823638, 'valid/mrr@1': 0.10311115392024658, 'valid/mrr@10': 0.15791292875815716, 'valid/mrr@50': 0.1683640969646985, 'valid/loss': 6.01560710251697, 'epoch': 0}
+2025-03-11 23:57:08.870 | INFO     | __main__:<module>:278 - new best model with loss
+2025-03-12 00:00:05.276 | INFO     | __main__:<module>:307 - {'test/recall@1': 0.0888570674906734, 'test/recall@10': 0.3128462147190715, 'test/recall@50': 0.5376267098767759, 'test/ndcg@1': 0.0888570674906734, 'test/ndcg@10': 0.18817426862140596, 'test/ndcg@50': 0.23859318548747974, 'test/mrr@1': 0.0888570674906734, 'test/mrr@10': 0.1498787273282351, 'test/mrr@50': 0.16101404039053963, 'test/loss': 5.91845397078074, 'epoch': 0}
+2025-03-12 00:31:58.084 | INFO     | __main__:<module>:269 - {'valid/recall@1': 0.12415719514544404, 'valid/recall@10': 0.34699479869004046, 'valid/recall@50': 0.5346753997303024, 'valid/ndcg@1': 0.12415719514544404, 'valid/ndcg@10': 0.2251075093536289, 'valid/ndcg@50': 0.2672566175231169, 'valid/mrr@1': 0.12415719514544404, 'valid/mrr@10': 0.18744755985419476, 'valid/mrr@50': 0.1968011534574564, 'valid/loss': 5.794893697726946, 'epoch': 1}
+2025-03-12 00:31:58.385 | INFO     | __main__:<module>:278 - new best model with loss
+2025-03-12 00:34:49.694 | INFO     | __main__:<module>:307 - {'test/recall@1': 0.11206994008365678, 'test/recall@10': 0.3518860458981799, 'test/recall@50': 0.550250593510947, 'test/ndcg@1': 0.11206994008365678, 'test/ndcg@10': 0.22174141955689228, 'test/ndcg@50': 0.2662952758177262, 'test/mrr@1': 0.11206994008365678, 'test/mrr@10': 0.18145633043015413, 'test/mrr@50': 0.19133988113883446, 'test/loss': 5.710682013860116, 'epoch': 1}
+2025-03-12 01:06:38.913 | INFO     | __main__:<module>:269 - {'valid/recall@1': 0.17554421113465613, 'valid/recall@10': 0.39154305528799843, 'valid/recall@50': 0.5542284723560008, 'valid/ndcg@1': 0.17554421113465613, 'valid/ndcg@10': 0.2751934688643807, 'valid/ndcg@50': 0.3113584274089169, 'valid/mrr@1': 0.17554421113465613, 'valid/mrr@10': 0.23897581150067423, 'valid/mrr@50': 0.2468442319790262, 'valid/loss': 5.534215786705719, 'epoch': 2}
+2025-03-12 01:06:39.253 | INFO     | __main__:<module>:278 - new best model with loss
+2025-03-12 01:09:26.061 | INFO     | __main__:<module>:307 - {'test/recall@1': 0.17692278705204054, 'test/recall@10': 0.4006481516373365, 'test/recall@50': 0.5674718317820402, 'test/ndcg@1': 0.17692278705204054, 'test/ndcg@10': 0.2796988785704865, 'test/ndcg@50': 0.3169599801103177, 'test/mrr@1': 0.17692278705204054, 'test/mrr@10': 0.24216196077646304, 'test/mrr@50': 0.2503405475138486, 'test/loss': 5.446722028347162, 'epoch': 2}
+2025-03-12 01:41:13.073 | INFO     | __main__:<module>:269 - {'valid/recall@1': 0.21108649585821615, 'valid/recall@10': 0.4240994028125602, 'valid/recall@50': 0.5747929108071662, 'valid/ndcg@1': 0.21108649585821615, 'valid/ndcg@10': 0.31208809793994413, 'valid/ndcg@50': 0.34542081829578836, 'valid/mrr@1': 0.21108649585821615, 'valid/mrr@10': 0.2769597846633597, 'valid/mrr@50': 0.28412501335695195, 'valid/loss': 5.329888452050144, 'epoch': 3}
+2025-03-12 01:41:13.419 | INFO     | __main__:<module>:278 - new best model with loss
+2025-03-12 01:43:57.965 | INFO     | __main__:<module>:307 - {'test/recall@1': 0.21087538154275162, 'test/recall@10': 0.4312092550024494, 'test/recall@50': 0.5868786976674077, 'test/ndcg@1': 0.21087538154275162, 'test/ndcg@10': 0.31460864194332444, 'test/ndcg@50': 0.34916703859234277, 'test/mrr@1': 0.21087538154275162, 'test/mrr@10': 0.2781450339384633, 'test/mrr@50': 0.2856316512381298, 'test/loss': 5.254237323999405, 'epoch': 3}
+2025-03-12 02:15:45.003 | INFO     | __main__:<module>:269 - {'valid/recall@1': 0.22620882296282027, 'valid/recall@10': 0.43686187632440765, 'valid/recall@50': 0.583509921017145, 'valid/ndcg@1': 0.22620882296282027, 'valid/ndcg@10': 0.3265890210746364, 'valid/ndcg@50': 0.3590323988859926, 'valid/mrr@1': 0.22620882296282027, 'valid/mrr@10': 0.29195698440660517, 'valid/mrr@50': 0.2989277377612695, 'valid/loss': 5.256530823151758, 'epoch': 4}
+2025-03-12 02:15:45.316 | INFO     | __main__:<module>:278 - new best model with loss
+2025-03-12 02:18:28.157 | INFO     | __main__:<module>:307 - {'test/recall@1': 0.22564720955646833, 'test/recall@10': 0.44323020688095865, 'test/recall@50': 0.5981836680860685, 'test/ndcg@1': 0.22564720955646833, 'test/ndcg@10': 0.3287585125838452, 'test/ndcg@50': 0.3629719457149452, 'test/mrr@1': 0.22564720955646833, 'test/mrr@10': 0.29287047550943024, 'test/mrr@50': 0.3001949702596846, 'test/loss': 5.180942184649981, 'epoch': 4}
+2025-03-12 02:18:28.379 | INFO     | __main__:<module>:316 - save final model
+
+UniCRSxGraphRAG                                 UniCRS
+
+'test/recall@1': 0.22564720955646833,           'test/recall@1': 0.10217444022310242,
+'test/recall@10': 0.44323020688095865,          'test/recall@10': 0.266429552986824, 
+'test/recall@50': 0.5981836680860685,           'test/recall@50': 0.4431331339422844,   
+
+
+'test/ndcg@1': 0.22564720955646833,             'test/ndcg@1': 0.10217444022310242,
+'test/ndcg@10': 0.3287585125838452,             'test/ndcg@10': 0.175477667813081,
+'test/ndcg@50': 0.3629719457149452,             'test/ndcg@50': 0.21426350404928865, 
+
+'test/mrr@1': 0.22564720955646833,              'test/mrr@1': 0.10217444022310242, 
+'test/mrr@10': 0.29287047550943024,             'test/mrr@10': 0.1474665816854943, 
+'test/mrr@50': 0.3001949702596846               'test/mrr@50': 0.1556659057409971, 
+
+'test/loss': 5.180942184649981                  'test/loss': 6.6713100118735404,

@@ -1,0 +1,13 @@
+2025-03-12 18:12:24.660 | INFO     | __main__:<module>:89 - Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+
+Mixed precision type: no
+
+2025-03-12 18:12:24.660 | INFO     | __main__:<module>:90 - {'seed': 42, 'output_dir': None, 'debug': False, 'dataset': 'redial', 'split': 'train', 'num_workers': 0, 'context_max_length': 200, 'resp_max_length': 183, 'entity_max_length': 32, 'prompt_max_length': 200, 'tokenizer': 'microsoft/DialoGPT-small', 'ignore_pad_token_for_loss': False, 'text_tokenizer': None, 'model': 'microsoft/DialoGPT-small', 'max_gen_len': 50, 'text_encoder': None, 'prompt_encoder': '/home/Nema/UniCRS_GraphRAG/UniCRS/src/conversation_prompt/best', 'n_prefix_conv': 20, 'num_bases': 8, 'num_train_epochs': 10, 'max_train_steps': None, 'per_device_train_batch_size': 4, 'per_device_eval_batch_size': 64, 'gradient_accumulation_steps': 1, 'learning_rate': 1e-05, 'weight_decay': 0.01, 'max_grad_norm': None, 'num_warmup_steps': 10000, 'mixed_precision': 'no', 'use_wandb': False, 'entity': None, 'project': None, 'name': None, 'log_all': False}
+2025-03-12 20:14:12.628 | INFO     | __main__:<module>:189 - {'train/bleu@1': 0.1492517838199571, 'train/bleu@2': 0.03747419291958643, 'train/bleu@3': 0.019374449290904625, 'train/bleu@4': 0.009342247370425244, 'train/dist@1': 0.09642019819926316, 'train/dist@2': 0.31595641980416495, 'train/dist@3': 0.5778316291348976, 'train/dist@4': 0.8205567704947101, 'train/item_ratio': 0.0, 'train/sent_cnt': 50757}
+
+
+    
