@@ -98,9 +98,9 @@ nohup bash -c "CUDA_VISIBLE_DEVICES=0 accelerate launch train_rec.py --dataset r
 nohup bash -c "CUDA_VISIBLE_DEVICES=0 accelerate launch train_unified.py --dataset redial --use_prompt_enhancer --tokenizer microsoft/DialoGPT-small --model microsoft/DialoGPT-small --n_prefix_conv 20  --n_prefix_rec 10 --prompt_encoder /home/Nema/UniCRS_GraphRAG/UniCRS/src/pretrained_prompt/best --num_train_epochs 10 --gradient_accumulation_steps 1 --ignore_pad_token_for_loss --per_device_train_batch_size 64 --per_device_eval_batch_size 64 --num_warmup_steps 6345 --context_max_length 200 --resp_max_length 183 --prompt_max_length 200 --entity_max_length 32 --learning_rate 1e-4 --output_dir /home/Nema/UniCRS_GraphRAG/UniCRS/src/unified_prompt > train_unified.log 2>&1 &"
 ```
 
-Part 3: Explainability Modules
+## Part 3: Explainability Modules
 This section covers the two novel inference-time modules introduced in this project: explicit KG path reasoning and KG-grounded conversational response generation.
-Step 1: KG Path Reasoning
+**Step 1:** KG Path Reasoning
 Run the path reasoning module over the full test split. This generates a reasoning path from dialogue-mentioned movies to the top-5 predicted movies for each sample.
 ```bash
 cd UniCRS/src
@@ -120,12 +120,12 @@ Monitor progress:
 ```bash
 tail -f ./results/kecr_run.log
 ```
-Step 2: Compute Path Coverage Metrics
+**Step 2:** Compute Path Coverage Metrics
 ```bash
 cd UniCRS/src/results
 python compute_pc5.py
 ```
-Step 3: KG-Grounded Response Generation
+**Step 3:** KG-Grounded Response Generation
 Run Mistral-7B-Instruct-v0.2 to generate natural language explanations conditioned on the dialogue history, recommended movie, and KG reasoning path. Only samples with a valid path are processed.
 ```bash
 cd UniCRS/src
